@@ -1,0 +1,110 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+main {
+  display: grid;
+  grid-template-areas:
+    "result result result result"
+    "clear positive-negative percentage divide"
+    "seven eight nine multiply"
+    "four five six minus"
+    "one two three sum"
+    "zero zero coma equal";
+}
+
+main button {
+  border: 1px solid #242424;
+  padding: 16px;
+  min-width: 64px;
+  min-height: 64px;
+  font-size: 24px;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+main .result {
+  grid-area: result;
+}
+
+main .clear {
+  grid-area: clear;
+}
+
+main .positive-negative {
+  grid-area: positive-negative;
+}
+
+main .percentage {
+  grid-area: percentage;
+}
+
+main .divide {
+  grid-area: divide;
+}
+
+main .seven {
+  grid-area: seven;
+}
+
+main .eight {
+  grid-area: eight;
+}
+
+main .nine {
+  grid-area: nine;
+}
+
+main .multiply {
+  grid-area: multiply;
+}
+
+main .four {
+  grid-area: four;
+}
+
+main .five {
+  grid-area: five;
+}
+
+main .six {
+  grid-area: six;
+}
+
+main .minus {
+  grid-area: minus;
+}
+
+main .one {
+  grid-area: one;
+}
+
+main .two {
+  grid-area: two;
+}
+
+main .three {
+  grid-area: three;
+}
+
+main .sum {
+  grid-area: sum;
+}
+
+main .zero {
+  grid-area: zero;
+}
+
+main .coma {
+  grid-area: coma;
+}
+
+main .equal {
+  grid-area: equal;
+}
