@@ -1,5 +1,8 @@
 import { useState } from "react";
+import BigNumber from "bignumber.js";
 import "./App.css";
+
+BigNumber.config({ DECIMAL_PLACES: 5 });
 
 const initialValues = {
   old: "0",
@@ -37,7 +40,7 @@ function App() {
   const percentage = () =>
     setValues((prevState) => ({
       ...prevState,
-      new: String(parseFloat(prevState.new) / 100),
+      new: new BigNumber(prevState.new).dividedBy(100).toString(),
     }));
 
   const addDot = () => {
@@ -65,20 +68,26 @@ function App() {
   const chooseOperation = (operation: Operations) => {
     setOperation(operation);
     setValues((prevState) => ({
-      new: "0",
-      old: prevState.new,
+      new:
+        values.old !== "0"
+          ? operations[operation](prevState.old, prevState.new)
+          : "0",
+      old:
+        values.old !== "0"
+          ? operations[operation](prevState.old, prevState.new)
+          : prevState.new,
     }));
   };
 
-  const sum = (a: string, b: string) => String(parseFloat(a) + parseFloat(b));
+  const sum = (a: string, b: string) => new BigNumber(a).plus(b).toString();
 
-  const minus = (a: string, b: string) => String(parseFloat(a) - parseFloat(b));
+  const minus = (a: string, b: string) => new BigNumber(a).minus(b).toString();
 
   const multiply = (a: string, b: string) =>
-    String(parseFloat(a) * parseFloat(b));
+    new BigNumber(a).multipliedBy(b).toString();
 
   const divide = (a: string, b: string) =>
-    String(parseFloat(a) / parseFloat(b));
+    new BigNumber(a).dividedBy(b).toString();
 
   const operations = {
     sum,
