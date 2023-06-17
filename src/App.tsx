@@ -30,6 +30,16 @@ function App() {
     });
   };
 
+  const addComa = () => {
+    setValue((prevState) => {
+      if (prevState.indexOf(",") === -1) {
+        return `${prevState},`;
+      }
+
+      return prevState;
+    });
+  };
+
   const setNumber = (number: string) => {
     setValue((prevState) => {
       if (prevState === "0") {
@@ -47,61 +57,41 @@ function App() {
   return (
     <main>
       <div className="result">{value}</div>
-      <button className="clear" onClick={clear}>
+      <button className="grey" onClick={clear}>
         AC
       </button>
-      <button className="positive-negative" onClick={positiveNegative}>
+      <button className="grey" onClick={positiveNegative}>
         +/-
       </button>
-      <button className="percentage" onClick={percentage}>
+      <button className="grey" onClick={percentage}>
         %
       </button>
-      <button className="divide" onClick={() => setOperation("divide")}>
+      <button className=" contrast" onClick={() => setOperation("divide")}>
         /
       </button>
-      <button className="seven" onClick={() => setNumber("7")}>
-        7
-      </button>
-      <button className="eight" onClick={() => setNumber("8")}>
-        8
-      </button>
-      <button className="nine" onClick={() => setNumber("9")}>
-        9
-      </button>
-      <button className="multiply" onClick={() => setOperation("multiply")}>
+      <button onClick={() => setNumber("7")}>7</button>
+      <button onClick={() => setNumber("8")}>8</button>
+      <button onClick={() => setNumber("9")}>9</button>
+      <button className="contrast" onClick={() => setOperation("multiply")}>
         x
       </button>
-      <button className="four" onClick={() => setNumber("4")}>
-        4
-      </button>
-      <button className="five" onClick={() => setNumber("5")}>
-        5
-      </button>
-      <button className="six" onClick={() => setNumber("6")}>
-        6
-      </button>
-      <button className="minus" onClick={() => setOperation("minus")}>
+      <button onClick={() => setNumber("4")}>4</button>
+      <button onClick={() => setNumber("5")}>5</button>
+      <button onClick={() => setNumber("6")}>6</button>
+      <button className="contrast" onClick={() => setOperation("minus")}>
         -
       </button>
-      <button className="one" onClick={() => setNumber("1")}>
-        1
-      </button>
-      <button className="two" onClick={() => setNumber("2")}>
-        2
-      </button>
-      <button className="three" onClick={() => setNumber("3")}>
-        3
-      </button>
-      <button className="sum" onClick={() => setOperation("sum")}>
+      <button onClick={() => setNumber("1")}>1</button>
+      <button onClick={() => setNumber("2")}>2</button>
+      <button onClick={() => setNumber("3")}>3</button>
+      <button className="contrast" onClick={() => setOperation("sum")}>
         +
       </button>
       <button className="zero" onClick={() => setNumber("0")}>
         0
       </button>
-      <button className="coma" onClick={() => setNumber(",")}>
-        ,
-      </button>
-      <button className="equal" onClick={calculate}>
+      <button onClick={addComa}>,</button>
+      <button className="contrast" onClick={calculate}>
         =
       </button>
     </main>

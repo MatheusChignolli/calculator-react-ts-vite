@@ -1,12 +1,12 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
 main {
+  gap: 12px;
+  color: #343a40;
   display: grid;
+  padding: 20px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  border-radius: 8px;
+  background-color: #dee2e6;
   grid-template-areas:
     "result result result result"
     "clear positive-negative percentage divide"
@@ -17,94 +17,42 @@ main {
 }
 
 main button {
-  border: 1px solid #242424;
+  color: #343a40;
+  cursor: pointer;
+  border: 0px solid transparent;
   padding: 16px;
   min-width: 64px;
-  min-height: 64px;
   font-size: 24px;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  min-height: 64px;
+  box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+  border-radius: 6px;
+  background-color: #ced4da;
+}
+
+main button:active {
+  opacity: 0.9;
+}
+
+.contrast {
+  background: #c7f9cc;
+}
+
+.grey {
+  background: #adb5bd;
 }
 
 main .result {
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+  padding: 16px;
+  font-size: 40px;
+  max-width: 100%;
+  text-align: right;
   grid-area: result;
-}
-
-main .clear {
-  grid-area: clear;
-}
-
-main .positive-negative {
-  grid-area: positive-negative;
-}
-
-main .percentage {
-  grid-area: percentage;
-}
-
-main .divide {
-  grid-area: divide;
-}
-
-main .seven {
-  grid-area: seven;
-}
-
-main .eight {
-  grid-area: eight;
-}
-
-main .nine {
-  grid-area: nine;
-}
-
-main .multiply {
-  grid-area: multiply;
-}
-
-main .four {
-  grid-area: four;
-}
-
-main .five {
-  grid-area: five;
-}
-
-main .six {
-  grid-area: six;
-}
-
-main .minus {
-  grid-area: minus;
-}
-
-main .one {
-  grid-area: one;
-}
-
-main .two {
-  grid-area: two;
-}
-
-main .three {
-  grid-area: three;
-}
-
-main .sum {
-  grid-area: sum;
+  margin-bottom: 16px;
+  background-color: #ced4da;
+  border-radius: 8px;
 }
 
 main .zero {
   grid-area: zero;
-}
-
-main .coma {
-  grid-area: coma;
-}
-
-main .equal {
-  grid-area: equal;
 }
