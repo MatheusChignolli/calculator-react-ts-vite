@@ -25,31 +25,20 @@ function App() {
     setOperation(initialOperation);
   };
 
-  const positiveNegative = () => {
-    setValues((prevState) => {
-      if (prevState.new.indexOf("-") === 0) {
-        return {
-          ...prevState,
-          new: prevState.new.replace("-", ""),
-        };
-      }
+  const positiveNegative = () =>
+    setValues((prevState) => ({
+      ...prevState,
+      new:
+        prevState.new.indexOf("-") === 0
+          ? prevState.new.replace("-", "")
+          : `-${prevState.new}`,
+    }));
 
-      return {
-        ...prevState,
-        new: `-${prevState.new}`,
-      };
-    });
-  };
-
-  const percentage = () => {
-    setValues((prevState) => {
-      const value = parseFloat(prevState.new);
-      return {
-        ...prevState,
-        new: String(value / 100),
-      };
-    });
-  };
+  const percentage = () =>
+    setValues((prevState) => ({
+      ...prevState,
+      new: String(parseFloat(prevState.new) / 100),
+    }));
 
   const addDot = () => {
     if (values.new.indexOf(".") === -1) {
@@ -81,21 +70,15 @@ function App() {
     }));
   };
 
-  const sum = (a: string, b: string) => {
-    return String(parseFloat(a) + parseFloat(b));
-  };
+  const sum = (a: string, b: string) => String(parseFloat(a) + parseFloat(b));
 
-  const minus = (a: string, b: string) => {
-    return String(parseFloat(a) - parseFloat(b));
-  };
+  const minus = (a: string, b: string) => String(parseFloat(a) - parseFloat(b));
 
-  const multiply = (a: string, b: string) => {
-    return String(parseFloat(a) * parseFloat(b));
-  };
+  const multiply = (a: string, b: string) =>
+    String(parseFloat(a) * parseFloat(b));
 
-  const divide = (a: string, b: string) => {
-    return String(parseFloat(a) / parseFloat(b));
-  };
+  const divide = (a: string, b: string) =>
+    String(parseFloat(a) / parseFloat(b));
 
   const operations = {
     sum,
