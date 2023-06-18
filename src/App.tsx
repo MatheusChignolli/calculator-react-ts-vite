@@ -4,11 +4,10 @@ import "./App.css";
 
 BigNumber.config({ DECIMAL_PLACES: 5 });
 
-const initialValues = {
-  old: "0",
-  new: "0",
+type Values = {
+  old?: string;
+  new?: string;
 };
-const initialOperation = null;
 
 enum Operations {
   sum = "sum",
@@ -17,8 +16,15 @@ enum Operations {
   multiply = "multiply",
 }
 
+const initialValues = {
+  old: undefined,
+  new: undefined,
+};
+
+const initialOperation = null;
+
 function App() {
-  const [values, setValues] = useState(initialValues);
+  const [values, setValues] = useState<Values>(initialValues);
   const [operation, setOperation] = useState<Operations | null>(
     initialOperation
   );
@@ -29,52 +35,68 @@ function App() {
   };
 
   const positiveNegative = () =>
-    setValues((prevState) => ({
-      ...prevState,
-      new:
-        prevState.new.indexOf("-") === 0
-          ? prevState.new.replace("-", "")
-          : `-${prevState.new}`,
-    }));
+    setValues((prevState) =>
+      prevState?.new
+        ? {
+            ...prevState,
+            new:
+              prevState?.new?.indexOf("-") === 0
+                ? prevState.new.replace("-", "")
+                : `-${prevState.new}`,
+          }
+        : prevState
+    );
 
-  const percentage = () =>
-    setValues((prevState) => ({
-      ...prevState,
-      new: new BigNumber(prevState.new).dividedBy(100).toString(),
-    }));
+  const percentage = () => {
+    if (values.new)
+      setValues((prevState) =>
+        prevState.new
+          ? {
+              ...prevState,
+              new: new BigNumber(prevState.new).dividedBy(100).toString(),
+            }
+          : prevState
+      );
+  };
 
   const addDot = () => {
-    if (values.new.indexOf(".") === -1) {
+    if (values?.new?.indexOf(".") === -1) {
       setValues((prevState) => ({ ...prevState, new: `${prevState.new}.` }));
     }
   };
 
   const setNumber = (number: string) => {
     setValues((prevState) => {
-      if (["0", "-0"].includes(prevState.new)) {
+      if (!prevState.new) {
+        return {
+          ...prevState,
+          new: number,
+        };
+      }
+
+      if (prevState.new && ["0", "-0"].includes(prevState.new)) {
         return {
           ...prevState,
           new: prevState.new.includes("-") ? `-${number}` : number,
         };
-      } else {
-        return {
-          ...prevState,
-          new: `${prevState.new}${number}`,
-        };
       }
+
+      return {
+        ...prevState,
+        new: `${prevState.new}${number}`,
+      };
     });
   };
 
   const chooseOperation = (operation: Operations) => {
     setOperation(operation);
     setValues((prevState) => ({
-      new:
-        values.old !== "0"
-          ? operations[operation](prevState.old, prevState.new)
-          : "0",
+      new: undefined,
       old:
-        values.old !== "0"
-          ? operations[operation](prevState.old, prevState.new)
+        prevState.old && prevState.new
+          ? operations[operation].function(prevState.old, prevState.new)
+          : prevState.old
+          ? prevState.old
           : prevState.new,
     }));
   };
@@ -90,23 +112,64 @@ function App() {
     new BigNumber(a).dividedBy(b).toString();
 
   const operations = {
-    sum,
-    minus,
-    multiply,
-    divide,
+    sum: {
+      label: "+",
+      function: sum,
+    },
+    minus: {
+      label: "-",
+      function: minus,
+    },
+    divide: {
+      label: "/",
+      function: divide,
+    },
+    multiply: {
+      label: "x",
+      function: multiply,
+    },
   };
 
   const calculate = () => {
-    if (operation) {
-      setValues((prevState) => {
-        return {
-          old: "0",
-          new: operations[operation](prevState.old, prevState.new),
-        };
-      });
+    if (operation && values.old && values.new) {
+      setValues((prevState) =>
+        prevState.old && prevState.new
+          ? {
+              old: undefined,
+              new: operations[operation].function(prevState.old, prevState.new),
+            }
+          : prevState
+      );
       setOperation(initialOperation);
     }
   };
+
+  const deleteNumber = () =>
+    setValues((prevState) => {
+      const slicedValue = prevState.new?.slice(0, -1);
+
+      if (slicedValue === "-") {
+        return {
+          ...prevState,
+          new: undefined,
+        };
+      }
+
+      if (
+        !!slicedValue &&
+        slicedValue?.indexOf(".") === slicedValue?.length - 1
+      ) {
+        return {
+          ...prevState,
+          new: slicedValue.slice(0, -1),
+        };
+      }
+
+      return {
+        ...prevState,
+        new: slicedValue,
+      };
+    });
 
   const buttons = [
     {
@@ -181,8 +244,11 @@ function App() {
       onClick: () => chooseOperation(Operations.sum),
     },
     {
+      label: "DEL",
+      onClick: deleteNumber,
+    },
+    {
       label: "0",
-      className: "zero",
       onClick: () => setNumber("0"),
     },
     {
@@ -199,7 +265,12 @@ function App() {
   return (
     <main>
       <div className="result">
-        {typeof values.new === "string" ? values.new : "Error!"}
+        {operation && !!values.old && (
+          <p>
+            {values.old} {operations[operation].label}
+          </p>
+        )}
+        {values.new}
       </div>
       {buttons.map(({ label, ...buttonProps }, index) => (
         <button key={`button-${index}`} {...buttonProps}>

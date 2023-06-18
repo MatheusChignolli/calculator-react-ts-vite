@@ -1,8 +1,9 @@
 main {
-  gap: 12px;
+  gap: 10px;
+  width: 320px;
   color: #343a40;
   display: grid;
-  padding: 20px;
+  padding: 24px 16px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   border-radius: 8px;
@@ -20,8 +21,8 @@ main button {
   color: #343a40;
   cursor: pointer;
   border: 0px solid transparent;
-  padding: 16px;
-  min-width: 64px;
+  padding: 8px;
+  min-width: 70px;
   font-size: 24px;
   min-height: 64px;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
@@ -38,21 +39,30 @@ main button:active {
 }
 
 .grey {
-  background: #adb5bd;
+  background: rgb(247, 201, 157);
 }
 
 main .result {
-  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
-  padding: 16px;
+  grid-area: result;
+  height: 46px;
+  padding: 24px 16px 8px 16px;
+  overflow: hidden;
+  position: relative;
   font-size: 40px;
   max-width: 100%;
   text-align: right;
-  grid-area: result;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
   margin-bottom: 16px;
-  background-color: #ced4da;
   border-radius: 8px;
+  background-color: #ced4da;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
-main .zero {
-  grid-area: zero;
+main .result p {
+  position: absolute;
+  top: 6px;
+  right: 16px;
+  margin: 0;
+  font-size: 18px;
 }
