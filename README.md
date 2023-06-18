@@ -1,5 +1,7 @@
 # Calculator
 
+Check it out on the following link: [LINK](https://calculatooooor.netlify.app/)
+
 ## About
 
 Simple calculate made with React JS + Vite, it uses a math JS library to have precise results.
