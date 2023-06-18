@@ -1,27 +1,10 @@
 import { useState } from "react";
 import BigNumber from "bignumber.js";
 import "./App.css";
+import { initialOperation, initialValues, operations } from "./utils";
+import { Operations, Values } from "./interfaces";
 
 BigNumber.config({ DECIMAL_PLACES: 5 });
-
-type Values = {
-  old?: string;
-  new?: string;
-};
-
-enum Operations {
-  sum = "sum",
-  minus = "minus",
-  divide = "divide",
-  multiply = "multiply",
-}
-
-const initialValues = {
-  old: undefined,
-  new: undefined,
-};
-
-const initialOperation = null;
 
 function App() {
   const [values, setValues] = useState<Values>(initialValues);
@@ -99,35 +82,6 @@ function App() {
           ? prevState.old
           : prevState.new,
     }));
-  };
-
-  const sum = (a: string, b: string) => new BigNumber(a).plus(b).toString();
-
-  const minus = (a: string, b: string) => new BigNumber(a).minus(b).toString();
-
-  const multiply = (a: string, b: string) =>
-    new BigNumber(a).multipliedBy(b).toString();
-
-  const divide = (a: string, b: string) =>
-    new BigNumber(a).dividedBy(b).toString();
-
-  const operations = {
-    sum: {
-      label: "+",
-      function: sum,
-    },
-    minus: {
-      label: "-",
-      function: minus,
-    },
-    divide: {
-      label: "/",
-      function: divide,
-    },
-    multiply: {
-      label: "x",
-      function: multiply,
-    },
   };
 
   const calculate = () => {
@@ -252,7 +206,7 @@ function App() {
       onClick: () => setNumber("0"),
     },
     {
-      label: ",",
+      label: ".",
       onClick: addDot,
     },
     {
@@ -263,21 +217,28 @@ function App() {
   ];
 
   return (
-    <main>
-      <div className="result">
-        {operation && !!values.old && (
-          <p>
-            {values.old} {operations[operation].label}
-          </p>
-        )}
-        {values.new}
-      </div>
-      {buttons.map(({ label, ...buttonProps }, index) => (
-        <button key={`button-${index}`} {...buttonProps}>
-          {label}
-        </button>
-      ))}
-    </main>
+    <>
+      <main>
+        <div className="result">
+          {operation && !!values.old && (
+            <p>
+              {values.old} {operations[operation].label}
+            </p>
+          )}
+          {values.new}
+        </div>
+        {buttons.map(({ label, ...buttonProps }, index) => (
+          <button key={`button-${index}`} {...buttonProps}>
+            {label}
+          </button>
+        ))}
+      </main>
+      <footer>
+        <a href="https://github.com/MatheusChignolli" target="_blank">
+          Developed by MatheusChignolli
+        </a>
+      </footer>
+    </>
   );
 }
 
