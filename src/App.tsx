@@ -222,6 +222,14 @@ function App() {
   return (
     <>
       <main className={theme}>
+        <button
+          className="switch"
+          onClick={() =>
+            setTheme((prevState) => (prevState === "dark" ? "light" : "dark"))
+          }
+        >
+          <div />
+        </button>
         <div className="result">
           {operation && !!values.old && (
             <p>
