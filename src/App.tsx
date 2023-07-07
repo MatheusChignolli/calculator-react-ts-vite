@@ -6,7 +6,10 @@ import { Operations, Values } from "./interfaces";
 
 BigNumber.config({ DECIMAL_PLACES: 5 });
 
+type Theme = "light" | "dark";
+
 function App() {
+  const [theme, setTheme] = useState<Theme>("dark");
   const [values, setValues] = useState<Values>(initialValues);
   const [operation, setOperation] = useState<Operations | null>(
     initialOperation
@@ -128,17 +131,17 @@ function App() {
   const buttons = [
     {
       label: "AC",
-      className: "grey",
+      className: "special",
       onClick: clear,
     },
     {
       label: "+/-",
-      className: "grey",
+      className: "special",
       onClick: positiveNegative,
     },
     {
       label: "%",
-      className: "grey",
+      className: "special",
       onClick: percentage,
     },
     {
@@ -218,7 +221,7 @@ function App() {
 
   return (
     <>
-      <main>
+      <main className={theme}>
         <div className="result">
           {operation && !!values.old && (
             <p>

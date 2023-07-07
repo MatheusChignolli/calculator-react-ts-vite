@@ -1,13 +1,9 @@
 main {
   gap: 10px;
   width: 320px;
-  color: #343a40;
   display: grid;
   padding: 24px 16px;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   border-radius: 8px;
-  background-color: #dee2e6;
   grid-template-areas:
     "result result result result"
     "clear positive-negative percentage divide"
@@ -17,8 +13,21 @@ main {
     "zero zero coma equal";
 }
 
-main button {
+main.light {
   color: #343a40;
+  background-color: #dee2e6;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+main.dark {
+  color: #ccd4dc;
+  background-color: #323639;
+  box-shadow: rgba(177, 177, 189, 0.25) 0px 6px 12px -2px,
+    rgba(198, 187, 187, 0.3) 0px 3px 7px -3px;
+}
+
+main button {
   cursor: pointer;
   border: 0px solid transparent;
   padding: 8px;
@@ -27,19 +36,36 @@ main button {
   min-height: 64px;
   box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
   border-radius: 6px;
+}
+
+main.light button {
   background-color: #ced4da;
+  color: #343a40;
+}
+
+main.dark button {
+  background-color: #1e2021;
+  color: #e7e9e9;
 }
 
 main button:active {
   opacity: 0.9;
 }
 
-.contrast {
+main.light .contrast {
   background: #c7f9cc;
 }
 
-.grey {
+main.light .special {
   background: rgb(247, 201, 157);
+}
+
+main.dark .contrast {
+  background: #bd77b0;
+}
+
+main.dark .special {
+  background: rgb(81, 161, 73);
 }
 
 main .result {
@@ -54,9 +80,16 @@ main .result {
   box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
   margin-bottom: 16px;
   border-radius: 8px;
-  background-color: #ced4da;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+main.light .result {
+  background-color: #ced4da;
+}
+
+main.dark .result {
+  background-color: #414244;
 }
 
 main .result p {
