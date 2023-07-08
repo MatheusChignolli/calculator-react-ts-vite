@@ -27,7 +27,7 @@
         background: rgb(247, 201, 157);
       }
 
-      &.switch div::after {
+      &.switch .line::after {
         background-color: rgb(176, 44, 44);
       }
     }
@@ -61,7 +61,7 @@
         background: rgb(81, 161, 73);
       }
 
-      &.switch div::after {
+      &.switch .line::after {
         background-color: rgb(74, 79, 186);
       }
     }
@@ -177,6 +177,44 @@
           left: 0;
           transition: all 0.3s ease-in-out 0s;
         }
+      }
+    }
+  }
+
+  .theme {
+    position: absolute;
+    top: -55px;
+    right: 45px;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #fff;
+
+    .degrade {
+      position: relative;
+
+      &::after {
+        left: -5px;
+        top: -5px;
+        content: "";
+        background-color: #000;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        rotate: calc(45deg);
+        z-index: -1;
+      }
+
+      &::before {
+        left: -5px;
+        top: -5px;
+        content: "";
+        background-color: #000;
+        height: 30px;
+        width: 30px;
+        position: absolute;
+        rotate: calc(90deg);
+        z-index: -1;
       }
     }
   }

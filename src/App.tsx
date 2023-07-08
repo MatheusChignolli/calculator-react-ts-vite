@@ -227,13 +227,16 @@ function App() {
   return (
     <>
       <main className="calculator">
+        <div className="theme">
+          <div className="degrade" />
+        </div>
         <button
           className="switch"
           onClick={() =>
             setTheme((prevState) => (prevState === "dark" ? "light" : "dark"))
           }
         >
-          <div />
+          <div className="line" />
         </button>
         <div className="result">
           {operation && !!values.old && (
