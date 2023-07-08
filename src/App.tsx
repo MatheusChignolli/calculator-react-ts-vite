@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BigNumber from "bignumber.js";
-import "./App.css";
+import "./app.scss";
 import { initialOperation, initialValues, operations } from "./utils";
 import { Operations, Values } from "./interfaces";
 
@@ -9,7 +9,7 @@ BigNumber.config({ DECIMAL_PLACES: 5 });
 type Theme = "light" | "dark";
 
 function App() {
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
   const [values, setValues] = useState<Values>(initialValues);
   const [operation, setOperation] = useState<Operations | null>(
     initialOperation
@@ -219,9 +219,14 @@ function App() {
     },
   ];
 
+  useEffect(() => {
+    document.body.removeAttribute("class");
+    document.body.classList.add(theme);
+  }, [theme]);
+
   return (
     <>
-      <main className={theme}>
+      <main className="calculator">
         <button
           className="switch"
           onClick={() =>
